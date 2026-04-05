@@ -6,7 +6,7 @@ this module handles:
 - schema creation
 - CRUD operations for products
 
-notes for lecturer:
+additional note:
 - warehouse is the "source of truth" for product data and stock
 - shop imports products and refreshes stock through warehouse API
 """
