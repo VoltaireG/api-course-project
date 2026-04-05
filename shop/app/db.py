@@ -4,7 +4,7 @@ shop db layer (sqlite)
 shop keeps its own database. products are imported from warehouse API and stored locally.
 stock can be refreshed per-product using warehouse stock endpoint.
 
-this matches lecturer requirement:
+shop functionality:
 - shop can delete all products
 - shop can import all products from warehouse api
 - shop can refresh a single product's stock using warehouse api
