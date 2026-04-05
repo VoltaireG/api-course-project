@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>{{ "create product" if mode == "create" else "edit product" }}</h2>
+
+<div class="card">
+  <form method="post" action="{{ '/products/create' if mode == 'create' else '/products/' ~ product.id ~ '/edit' }}">
+    <div style="margin-bottom: 10px;">
+      <label>name</label>
+      <input name="name" required value="{{ '' if not product else product.name }}" />
+    </div>
+
+    <div style="margin-bottom: 10px;">
+      <label>description</label>
+      <textarea name="description" required>{{ '' if not product else product.description }}</textarea>
+    </div>
+
+    <div style="margin-bottom: 10px;">
+      <label>price (eur)</label>
+      <input name="price" type="number" step="0.01" required value="{{ '' if not product else product.price }}" />
+    </div>
+
+    <div style="margin-bottom: 10px;">
+      <label>stock</label>
+      <input name="stock" type="number" step="1" required value="{{ '' if not product else product.stock }}" />
+    </div>
+
+    <div class="row">
+      <button class="btn" type="submit">save</button>
+      <a class="btn" href="/products">cancel</a>
+    </div>
+  </form>
+</div>
+{% endblock %}

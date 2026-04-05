@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>products</h2>
+
+{% if request.query_params.get('msg') %}
+  <div class="card">
+    <strong>status:</strong> {{ request.query_params.get('msg') }}<br />
+    {% if request.query_params.get('id') %}
+      <strong>product id:</strong> {{ request.query_params.get('id') }}<br />
+    {% endif %}
+    {% if request.query_params.get('stock') %}
+      <strong>new stock:</strong> {{ request.query_params.get('stock') }}<br />
+    {% endif %}
+    {% if request.query_params.get('detail') %}
+      <strong>detail:</strong> {{ request.query_params.get('detail') }}<br />
+    {% endif %}
+  </div>
+{% endif %}
+
+{% if products|length == 0 %}
+  <div class="card">
+    shop database is empty. go to <a href="/admin">admin</a> and click "import all products from warehouse".
+  </div>
+{% else %}
+<table>
+  <thead>
+    <tr>
+      <th>id</th>
+      <th>name</th>
+      <th>description</th>
+      <th>price (eur)</th>
+      <th>stock</th>
+      <th>actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for p in products %}
+    <tr>
+      <td>{{ p.id }}</td>
+      <td>{{ p.name }}</td>
+      <td>{{ p.description }}</td>
+      <td>{{ "%.2f"|format(p.price) }}</td>
+      <td>{{ p.stock }}</td>
+      <td class="row">
+        <form method="post" action="/admin/products/{{ p.id }}/refresh-stock">
+          <button class="btn" type="submit">update stock (from warehouse)</button>
+        </form>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endif %}
+
+{% endblock %}

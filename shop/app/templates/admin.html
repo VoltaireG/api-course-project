@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>admin panel</h2>
+
+<div class="card">
+  <h3>actions</h3>
+
+  <div class="row" style="margin-bottom: 12px;">
+    <form method="post" action="/admin/delete-all" onsubmit="return confirm('delete all products in shop db?');">
+      <button class="btn btn-danger" type="submit">delete all products (shop db)</button>
+    </form>
+
+    <form method="post" action="/admin/import">
+      <button class="btn" type="submit">import all products from warehouse</button>
+    </form>
+  </div>
+
+  <div class="muted">
+    import calls <code>GET /api/products</code> from warehouse and stores results in shop database.
+  </div>
+</div>
+
+{% if request.query_params.get('msg') %}
+<div class="card">
+  <strong>status:</strong> {{ request.query_params.get('msg') }}<br />
+  {% if request.query_params.get('detail') %}
+    <strong>detail:</strong> {{ request.query_params.get('detail') }}<br />
+  {% endif %}
+  {% if request.query_params.get('count') %}
+    <strong>imported:</strong> {{ request.query_params.get('count') }} products<br />
+  {% endif %}
+</div>
+{% endif %}
+
+{% endblock %}

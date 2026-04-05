@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>products</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>id</th>
+      <th>name</th>
+      <th>description</th>
+      <th>price (eur)</th>
+      <th>stock</th>
+      <th>actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for p in products %}
+    <tr>
+      <td>{{ p.id }}</td>
+      <td>{{ p.name }}</td>
+      <td>{{ p.description }}</td>
+      <td>{{ "%.2f"|format(p.price) }}</td>
+      <td>{{ p.stock }}</td>
+      <td class="row">
+        <a class="btn" href="/products/{{ p.id }}/edit">edit</a>
+        <form method="post" action="/products/{{ p.id }}/delete" onsubmit="return confirm('delete product?');">
+          <button class="btn btn-danger" type="submit">delete</button>
+        </form>
+        <a class="btn" href="/api/products/{{ p.id }}/stock" target="_blank">api: stock</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
