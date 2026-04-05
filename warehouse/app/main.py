@@ -3,7 +3,7 @@ warehouse system (noliktava)
 
 features:
 - UI to manage products (create/edit/delete)
-- API endpoints required by lecturer:
+- API endpoints:
   1) GET /api/products -> all products as json
   2) GET /api/products/{id}/stock -> current stock for a single product as json
 """
@@ -47,7 +47,7 @@ def health() -> dict:
 def api_all_products() -> JSONResponse:
     """
     returns all products (including stock) in json.
-    lecturer requirement: "par visiem produktiem"
+    requirement: "par visiem produktiem"
     """
     return JSONResponse(content=list_products())
 
@@ -56,7 +56,7 @@ def api_all_products() -> JSONResponse:
 def api_product_stock(product_id: int) -> JSONResponse:
     """
     returns only a single product's current stock in json.
-    lecturer requirement: "viena produkta atlikumu"
+    requirement: "viena produkta atlikumu"
     """
     p = get_product(product_id)
     if not p:
