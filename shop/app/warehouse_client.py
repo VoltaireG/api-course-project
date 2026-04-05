@@ -1,7 +1,7 @@
 """
 warehouse api client for shop
 
-this file is the key for lecturer: it shows how shop communicates with warehouse via http API.
+this shows how shop communicates with warehouse via http API.
 
 required warehouse endpoints:
 - GET {WAREHOUSE_BASE_URL}/api/products
